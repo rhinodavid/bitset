@@ -18,7 +18,7 @@ func pow(base, exp int) (r int) {
 }
 
 // NewFromSlice takes a slice of positive integers and returns the corresponding
-// Bitset
+// Bitset.
 func NewFromSlice(a []int) (r Bitset) {
 	for i, v := range a {
 		if v < 0 {
@@ -30,7 +30,7 @@ func NewFromSlice(a []int) (r Bitset) {
 }
 
 // ToSlice returns an array of integers representing the members of the set
-// contained in the Bitset
+// contained in the Bitset.
 func (b Bitset) ToSlice() []int {
 	x := b
 	r := make([]int, 0)
@@ -43,19 +43,6 @@ func (b Bitset) ToSlice() []int {
 	return r
 }
 
-// RemoveMember takes an integer value
-func (b Bitset) RemoveMember(i int) (r Bitset) {
-	if i < 0 {
-		log.Fatalf("Attempt to remove negative member from the Bitset: %d", i)
-	}
-	// check to see if index exists
-	if b&Bitset(pow(2, i)) == Bitset(pow(2, i)) {
-		r = b
-		return r - Bitset(pow(2, i))
-	}
-	return b
-}
-
 // Contains accepts a positive integer and returns true if it is
 // contained in the Bitset and false if it is not
 func (b Bitset) Contains(i int) bool {
@@ -63,6 +50,20 @@ func (b Bitset) Contains(i int) bool {
 		log.Fatalf("Attempt to check negative member in Bitset: %d", i)
 	}
 	return b&Bitset(pow(2, i)) == Bitset(pow(2, i))
+}
+
+// RemoveMember takes a positive integer and removes it from the Bitset if
+// it was a member of the set
+func (b Bitset) RemoveMember(i int) (r Bitset) {
+	if i < 0 {
+		log.Fatalf("Attempt to remove negative member from the Bitset: %d", i)
+	}
+	// check to see if index exists
+	if b.Contains(i) {
+		r = b
+		return r - Bitset(pow(2, i))
+	}
+	return b
 }
 
 func countBits(x int) (r int) {
