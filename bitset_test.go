@@ -5,12 +5,9 @@ import (
 	"testing"
 )
 
-var (
-	arrs    = [][]int{[]int{}, []int{0}, []int{1}, []int{0, 1, 2}, []int{1, 4, 10}}
-	bitsets = []Bitset{0, 1, 2, 7, 1042}
-)
-
 func TestCreate(t *testing.T) {
+	arrs := [][]int{[]int{}, []int{0}, []int{1}, []int{0, 1, 2}, []int{1, 4, 10}}
+	bitsets := []Bitset{0, 1, 2, 7, 1042}
 	for i, arr := range arrs {
 		bs := NewFromSlice(arr)
 		if bs != bitsets[i] {
@@ -20,6 +17,8 @@ func TestCreate(t *testing.T) {
 }
 
 func TestToSlice(t *testing.T) {
+	arrs := [][]int{[]int{}, []int{0}, []int{1}, []int{0, 1, 2}, []int{1, 4, 10}}
+	bitsets := []Bitset{0, 1, 2, 7, 1042}
 	for i, bs := range bitsets {
 		arr := bs.ToSlice()
 		if !reflect.DeepEqual(arr, arrs[i]) {
