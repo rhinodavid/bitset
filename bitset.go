@@ -109,3 +109,9 @@ func (b Bitset) PowerSet() [][]Bitset {
 	}
 	return result
 }
+
+// Union operates on one Bitset, accepts a second Bitset,
+// and returns the union of the two
+func (b Bitset) Union(c Bitset) Bitset {
+	return b & c
+}

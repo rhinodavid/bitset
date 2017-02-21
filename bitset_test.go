@@ -72,3 +72,24 @@ func TestPowerSet(t *testing.T) {
 		t.Fatalf("Full set not present in powersets of length n")
 	}
 }
+
+func TestUnion(t *testing.T) {
+	bitsets := []Bitset{
+		NewFromSlice([]int{}),
+		NewFromSlice([]int{1}),
+		NewFromSlice([]int{1, 2, 3}),
+		NewFromSlice([]int{3}),
+	}
+	if u, a := bitsets[0].Union(bitsets[1]), NewFromSlice([]int{}); u != a {
+		t.Fatalf("Incorrect union, expected %v, got %v", a, u)
+	}
+	if u, a := bitsets[1].Union(bitsets[2]), NewFromSlice([]int{1}); u != a {
+		t.Fatalf("Incorrect union, expected %v, got %v", a, u)
+	}
+	if u, a := bitsets[1].Union(bitsets[3]), NewFromSlice([]int{}); u != a {
+		t.Fatalf("Incorrect union, expected %v, got %v", a, u)
+	}
+	if u, a := bitsets[2].Union(bitsets[3]), NewFromSlice([]int{3}); u != a {
+		t.Fatalf("Incorrect union, expected %v, got %v", a, u)
+	}
+}
